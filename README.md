@@ -26,6 +26,6 @@ signature    | 签名
 
 ## Demo
 
-  - [Java](/blob/master/signature.java)
-  - [Node.js](/blob/master/signature.js)
-  - [php](/blob/master/signature.php)
+  - [Java](signature.java)
+  - [Node.js](signature.js)
+  - [php](signature.php)
