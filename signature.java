@@ -33,10 +33,10 @@ class Untitled {
         // 遍历排序后的字典，将所有参数按"key=value"格式拼接在一起
         StringBuilder basestring = new StringBuilder();
         for (Map.Entry<String, String> param : entrys) {
-            basestring.append(param.getKey()).append("=").append(param.getValue()).append("&");
+            basestring.append(param.getKey()).append("=").append(URLEncoder.encode(param.getValue()).replace("+", "%20")).append("&");
         }
         basestring.delete(basestring.length()-1, basestring.length()).append(":").append(secret);
-        System.out.println(basestring);
+        // System.out.println(basestring);
         // 使用MD5对待签名串求签
         byte[] bytes;
         try {
