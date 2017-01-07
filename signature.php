@@ -24,7 +24,7 @@
         $array=array();
         //遍历排序后的参数数组中的每一个key/value对
         foreach ($params as $k => $v) {
-            array_push($array, "$k=$v");
+            array_push($array, "$k=".rawurlencode($v));
         }
         // 通过 `&` 字符串拼接在一起
         $str .= join("&",$array);
@@ -36,7 +36,7 @@
     }
     
     function test() {
-        $app_id = "5vY4mg0Eog8SWo0mHYSWbqpl";
+        $app_id = "5vY4mg0Eog8SWo0mHYSWbqp l";
         $token = "Ppuj8xfvb8jltBkcDvALFcEtWvgXGdxj";
 
         $params = array(
