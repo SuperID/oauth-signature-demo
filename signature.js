@@ -18,10 +18,10 @@ function parseUrl (url) {
 
 function getSignature (query, token) {
   var string = Object.keys(query).sort().map(function (k) {
-    return k + '=' + query[k];
-  }).join('&');
+    return k + '=' + encodeURIComponent(query[k]);
+  }).join('&') + ':' + token;
   console.log(string);
-  return md5(string + ':' + token);
+  return md5(string);
 }
 
 function test() {
