@@ -6,9 +6,10 @@
 //  Copyright © 2016 Yourtion. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonCrypto.h>
 
-@implementation SIDSign
+@implementation SIDSign : NSObject
 
 + (void)demo {
     NSDictionary *dictionary = @{
@@ -21,6 +22,7 @@
     NSString *sign = [SIDSign getSignatureWithParmas:dictionary andSecret:@"Ppuj8xfvb8jltBkcDvALFcEtWvgXGdxj"];
     
     NSLog(@"Sign: %@", sign);
+    NSLog(@"SHA1:%@",[SIDSign sha1:@"com.ISNC.FaceChat"]);
 }
 
 + (NSString *)md5:(NSString *)string{
@@ -45,9 +47,9 @@
     }];
     
     NSString *basestring = [[NSString alloc] init];
-    for (NSString *categoryId in sortedArray) {
-        basestring = [NSString stringWithFormat:@"%@&%@=%@", basestring, categoryId, [params objectForKey:categoryId]];
-        
+    for (NSString *key in sortedArray) {
+        NSString *value = [[NSString stringWithFormat:@"%@", [params objectForKey:key]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        basestring = [NSString stringWithFormat:@"%@&%@=%@", basestring, key, value];
     }
     basestring = [basestring substringFromIndex:1];
     basestring = [basestring stringByAppendingFormat:@":%@", secret];
@@ -59,3 +61,9 @@
 }
 
 @end
+
+int main(int argc, char *argv[]) {
+    @autoreleasepool {
+        [SIDSign demo];
+    }
+}
